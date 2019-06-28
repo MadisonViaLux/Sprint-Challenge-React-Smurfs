@@ -6,7 +6,7 @@ class Hi extends React.Component {
     render(){
         return(
             <div>
-                <p>..this page goes nowhere and is only for testing..</p>
+                <p>..Smurfs are the scocial constructs of nazism..</p>
             </div>
         )
     }

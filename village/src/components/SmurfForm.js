@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import '../App.css'
+
+
 
 class SmurfForm extends Component {
   state = {
@@ -6,7 +9,6 @@ class SmurfForm extends Component {
       age: '',
       height: ''
     };
-
     
 
     handleInputChange = event => {
@@ -24,7 +26,7 @@ class SmurfForm extends Component {
     // add code to create the smurf using the api
     // console.log(event)
     this.props.submitSmurf(this.state)
-    console.log(this.state)
+    // console.log(this.state)
   }
 
 
@@ -32,8 +34,8 @@ class SmurfForm extends Component {
 
   render() {
     return (
-      <div className="SmurfForm">
-        <form onSubmit={this.addSmurf}>
+      <div className="inputSmurf">
+        <form  className="SmurfForm" onSubmit={this.addSmurf}>
           <input
             onChange={this.handleInputChange}
             placeholder="name"

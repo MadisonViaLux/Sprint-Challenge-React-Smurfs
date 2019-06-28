@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import axios from 'axios'
 import './App.css';
 import SmurfForm from './components/SmurfForm';
-// import Hi from './components/hi'
+import Hi from './components/hi'
 
-import { BrowserRouter as Router, Route, Link} from 'react-router-dom'
+import { BrowserRouter as Router, Route, Link, NavLink} from 'react-router-dom'
 // import Smurfs from './components/Smurfs';
 
 
@@ -76,27 +76,53 @@ submitSmurf = addedObject => {
       <Router>
         <div className="App">
 
-          <Link exact className="nav-link" to="/">Home</Link>
+          <nav className='NavBar'>
+            <NavLink exact className="nav-link" to="/">Home</NavLink>
+            <NavLink exact className="nav-link" to="/smurf-form">This goes somewhere...</NavLink>
+          </nav>
+
+
+
+          <br/>
+
+          
+          
+          <div className='linkNav'>
+            <Link exact className="thisLink" to="/">Hide truth</Link>
+            <br/>
+            <Link exact className="thisLink" to="/smurf-form">Reveal truth</Link>
+          </div>
+
+
+
 
           <SmurfForm 
           submitSmurf={this.submitSmurf}
           />
 
-          {this.state.smurfs.map(newSmerf => (
-            <div className="Smurf" key={newSmerf.id}>
 
-              <h3>{newSmerf.name}</h3>
 
-              <strong>{newSmerf.height} tall</strong>
-              
-              <p>{newSmerf.age} smurf years old</p>
+          <div className='smurfBox'>
 
-            </div>
-          ))}
+            <h1>Smurf Village</h1>
+
+            {this.state.smurfs.map(newSmerf => (
+              <div className="Smurf" key={newSmerf.id}>
+
+                <h3 className='pokemonName'><strong>NAME: </strong>{newSmerf.name}</h3>
+
+                <strong className='pokemonSize'><strong>SIZE: </strong>{newSmerf.height}rem tall</strong>
+
+                <p><strong>HEIGHT: </strong>{newSmerf.age} smurf years old</p>
+              </div>
+            ))}
+
+          </div>
+
 
 
             <Route exact path="/" />
-            <Route exact path='/smurf-form' />
+            <Route exact path='/smurf-form' component={Hi} />
 
 
 
