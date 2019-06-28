@@ -2,7 +2,15 @@ import React, { Component } from 'react';
 import axios from 'axios'
 import './App.css';
 import SmurfForm from './components/SmurfForm';
+// import Hi from './components/hi'
+
+import { BrowserRouter as Router, Route, Link} from 'react-router-dom'
 // import Smurfs from './components/Smurfs';
+
+
+
+
+
 
 class App extends Component {
   constructor(props) {
@@ -10,9 +18,12 @@ class App extends Component {
     this.state = {
       smurfs: [],
     };
-
     // console.log(props)
   }
+
+  // state = {
+  //   smurfs: [],
+  // };
 
 
 
@@ -36,16 +47,20 @@ componentDidMount(){
 
 
 submitSmurf = addedObject => {
+
+  console.log(addedObject)
+
   axios
     .post('http://localhost:3333/smurfs', addedObject)
     .then(response => {
-      // console.log('log me---', response.data)
+      console.log('log me---', response)
       this.setState({
         smurfs: response.data
       })
     })
     .catch(error => console.log('you done broke it again...', error))
 }
+
 
 
   // add any needed code to ensure that the smurfs collection exists on state and it has data coming from the server
@@ -58,31 +73,48 @@ submitSmurf = addedObject => {
 
   render() {
     return (
-      <div className="App">
+      <Router>
+        <div className="App">
 
-        <SmurfForm 
-        submitSmurf={this.submitSmurf}
-        />
+          <Link exact className="nav-link" to="/">Home</Link>
 
-        
+          <SmurfForm 
+          submitSmurf={this.submitSmurf}
+          />
 
-        {this.state.smurfs.map(newSmerf => (
+          {this.state.smurfs.map(newSmerf => (
+            <div className="Smurf" key={newSmerf.id}>
 
-          <div className="Smurf" key={newSmerf.id}>
+              <h3>{newSmerf.name}</h3>
 
-            <h3>{newSmerf.name}</h3>
+              <strong>{newSmerf.height} tall</strong>
+              
+              <p>{newSmerf.age} smurf years old</p>
 
-            <strong>{newSmerf.height} tall</strong>
-            
-            <p>{newSmerf.age} smurf years old</p>
+            </div>
+          ))}
 
-          </div>
 
-        ))}
+            <Route exact path="/" />
+            <Route exact path='/smurf-form' />
 
-        {/* <Smurfs smurfs={this.state.smurfs} /> */}
 
-      </div>
+
+
+          {/* <Smurfs smurfs={this.state.smurfs} /> */}
+
+          {/* <Smurfs smurfs={this.state.smurfs.map(newSmerf => (
+
+            <div key={newSmerf.id}>
+              <h3>{newSmerf.name}</h3>
+              <strong>{newSmerf.height} tall</strong>
+              <p>{newSmerf.age} smurf years old</p>
+            </div>
+
+            ))} /> */}
+
+        </div>
+      </Router>
     );
   }
 }

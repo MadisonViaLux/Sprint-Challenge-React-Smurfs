@@ -7,10 +7,11 @@ class SmurfForm extends Component {
       height: ''
     };
 
+    
 
-    handleInputChange = e => {
+    handleInputChange = event => {
       this.setState({
-          [e.target.name]: e.target.value
+        [event.target.name]: event.target.value
       });
     };
 
@@ -22,8 +23,8 @@ class SmurfForm extends Component {
     event.preventDefault();
     // add code to create the smurf using the api
     // console.log(event)
-    this.props.submitSmurf(this.State)
-    // console.log(this.state)
+    this.props.submitSmurf(this.state)
+    console.log(this.state)
   }
 
 
