@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import axios from 'axios'
 import './App.css';
 import SmurfForm from './components/SmurfForm';
-import Hi from './components/hi'
 
-import { BrowserRouter as Router, Route, Link, NavLink} from 'react-router-dom'
-// import Smurfs from './components/Smurfs';
+import { BrowserRouter as Router, Route, NavLink} from 'react-router-dom'
+import Smurfs from './components/Smurfs';
 
 
 
@@ -85,28 +84,18 @@ submitSmurf = addedObject => {
 
           <br/>
 
-          
-          
-          <div className='linkNav'>
-            <Link exact className="thisLink" to="/">Hide truth</Link>
-            <br/>
-            <Link exact className="thisLink" to="/smurf-form">Reveal truth</Link>
-          </div>
 
 
 
-
-          <SmurfForm 
+          {/* <SmurfForm 
           submitSmurf={this.submitSmurf}
-          />
+          /> */}
 
 
 
           <div className='smurfBox'>
 
-            <h1>Smurf Village</h1>
-
-            {this.state.smurfs.map(newSmerf => (
+            {/* {this.state.smurfs.map(newSmerf => (
               <div className="Smurf" key={newSmerf.id}>
 
                 <h3 className='pokemonName'><strong>NAME: </strong>{newSmerf.name}</h3>
@@ -115,14 +104,14 @@ submitSmurf = addedObject => {
 
                 <p><strong>HEIGHT: </strong>{newSmerf.age} smurf years old</p>
               </div>
-            ))}
+            ))} */}
 
           </div>
 
 
 
-            <Route exact path="/" />
-            <Route exact path='/smurf-form' component={Hi} />
+            <Route exact path="/" render={props => <Smurfs {...props} smurfs={this.state.smurfs}/>}/>
+            <Route exact path='/smurf-form' render={props => <SmurfForm {...props} submitSmurf={this.submitSmurf}/>} />
 
 
 
@@ -130,7 +119,6 @@ submitSmurf = addedObject => {
           {/* <Smurfs smurfs={this.state.smurfs} /> */}
 
           {/* <Smurfs smurfs={this.state.smurfs.map(newSmerf => (
-
             <div key={newSmerf.id}>
               <h3>{newSmerf.name}</h3>
               <strong>{newSmerf.height} tall</strong>
